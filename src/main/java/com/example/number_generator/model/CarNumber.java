@@ -1,57 +1,61 @@
 package com.example.number_generator.model;
 
 
+import lombok.*;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
+@Entity
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class CarNumber {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String fullNumber;
-    private Boolean isIssued;
 
-    public CarNumber(Long id, String fullNumber, Boolean isIssued) {
-        this.id = id;
-        this.fullNumber = fullNumber;
-        this.isIssued = isIssued;
-    }
+    @Column(name = "firstLetter", unique = false, nullable = false)
+    private String firstLetter;
 
-    public CarNumber() {
-    }
+    @Column(name = "number", unique = false, nullable = false)
+    private Integer number;
 
-    public Long getId() {
-        return id;
-    }
+    @Column(name = "secondLetter", unique = false, nullable = false)
+    private String secondLetter;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @Column(name = "thirdLetter", unique = false, nullable = false)
+    private String thirdLetter;
 
-    public String getFullNumber() {
-        return fullNumber;
-    }
+    @Column(name = "region", unique = false, nullable = false)
+    private static final String REGION = "116 RUS";
 
-    public void setFullNumber(String fullNumber) {
-        this.fullNumber = fullNumber;
-    }
+    @Column(name = "isRandom", unique = false, nullable = false)
+    private Boolean isRandom;
 
-    public Boolean getIssued() {
-        return isIssued;
-    }
+    @Column(name = "createAt")
+    private LocalDateTime createAt;
 
-    public void setIssued(Boolean issued) {
-        isIssued = issued;
-    }
+    @Column(name = "fullCarNumber", unique = true, nullable = false)
+    private String fullCarNumber;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CarNumber carNumber = (CarNumber) o;
-        return id.equals(carNumber.id) && fullNumber.equals(carNumber.fullNumber) && isIssued.equals(carNumber.isIssued);
+        return Objects.equals(id, carNumber.id) && Objects.equals(firstLetter, carNumber.firstLetter) && Objects.equals(number, carNumber.number) && Objects.equals(secondLetter, carNumber.secondLetter) && Objects.equals(thirdLetter, carNumber.thirdLetter) && Objects.equals(REGION, carNumber.REGION) && Objects.equals(isRandom, carNumber.isRandom) && Objects.equals(createAt, carNumber.createAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, firstLetter, number, secondLetter, thirdLetter, REGION, isRandom, createAt);
     }
+
+
 }
+
+

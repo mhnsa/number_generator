@@ -1,10 +1,12 @@
 package com.example.number_generator.service;
 
 
-import java.util.Set;
+import com.example.number_generator.model.CarNumber;
 
 public interface CarNumberService {
-    String generateRandomCarNumber();
-    String generateNextCarNumber();
-    Set<String> showAll();
+    CarNumber generateRandomCarNumber();
+    String generateTextRandomCarNumber();
+    CarNumber generateNextCarNumber();
+    String generateTextNextCarNumber();
+
 }
